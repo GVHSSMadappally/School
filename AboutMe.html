@@ -1,0 +1,281 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Cyberworrier Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
+      color: #FAFAFA;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #000000;
+  padding: 1rem 0;
+  box-shadow: 0 4px 10px rgba(255, 183, 77, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+nav a {
+  margin: 0 0.5rem;
+  color: #FFB74D;
+  text-decoration: none;
+  font-size: 1rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease-in-out;
+  opacity: 0;
+  animation: fade 1s ease-in-out forwards;
+}
+
+nav a:hover {
+  border-bottom: 2px solid #FFBFBF;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 2.5rem;
+  animation: fade 2s ease-in-out forwards;
+  opacity: 0;
+}
+
+.Type {
+  text-align: center;
+  font-family: monospace;
+  font-size: 1.5rem;
+  color: #FFB74D;
+  margin: 1rem 0;
+}
+
+.Type span::before {
+  content: '';
+  display: inline-block;
+  border-right: 2px solid #FFB74D;
+  animation: typing 8s steps(30, end) infinite;
+}
+
+.Parg {
+  max-width: 65ch;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  color: #B0BEC5;
+  text-align: center;
+  line-height: 1.6;
+  opacity: 0;
+  animation: slideUp 2s ease forwards 1s;
+}
+
+@keyframes fade {
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes typing {
+  0%, 5% {
+    content: 'M';
+    width: 1ch;
+    color: #B0BEC5;
+  }
+  10% {
+    content: 'Mu';
+    width: 2ch;
+  }
+  15% {
+    content: 'Muh';
+    width: 3ch;
+  }
+  20% {
+    content: 'Muha';
+    width: 4ch;
+  }
+  25% {
+    content: 'Muhan';
+    width: 5ch;
+  }
+  30% {
+    content: 'Muhamm';
+    width: 6ch;
+  }
+  32% {
+    content: 'Muhamma';
+    width: 7ch;
+  }
+  34% {
+    content: 'Muhammad';
+    width: 8ch;
+  }
+  36% {
+    content: 'Muhammad ';
+    width: 9ch;
+  }
+  38% {
+    content: 'Muhammad N';
+    width: 10ch;
+  }
+  39% {
+    content: 'Muhammad Na';
+    width: 11ch;
+  }
+  40% {
+    content: 'Muhammad Nab';
+    width: 12ch;
+  }
+  41% {
+    content: 'Muhammad Nabh';
+    width: 13ch;
+  }
+  42% {
+    content: 'Muhammad Nabha';
+    width: 14ch;
+  }
+  43% {
+    content: 'Muhammad Nabhan';
+    width: 15ch;
+  }
+  50% {
+    content: '';
+    width: 0ch;
+  }
+  60% {
+    content: 'C';
+    width: 1ch;
+  }
+  65% {
+    content: 'Cy';
+    width: 2ch;
+  }
+  67% {
+    content: 'Cyb';
+    width: 3ch;
+  }
+  70% {
+    content: 'Cybe';
+    width: 4ch;
+  }
+  73% {
+    content: 'Cyber';
+    width: 5ch;
+  }
+  75% {
+    content: 'Cyberw';
+    width: 6ch;
+  }
+  77% {
+    content: 'Cyberwo';
+    width: 7ch;
+  }
+  79% {
+    content: 'Cyberwor';
+    width: 8ch;
+  }
+  81% {
+    content: 'Cyberworr';
+    width: 9ch;
+  }
+  83% {
+    content: 'Cyberworri';
+    width: 10ch;
+  }
+  85% {
+    content: 'Cyberworrier';
+    width: 13ch;
+  }
+  100% {
+    content: 'Cyberworrier';
+    width: 13ch;
+  }
+}
+
+#img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  animation: fade 2s ease-in-out forwards;
+  opacity: 0;
+}
+
+#runner {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  animation: move 6s linear infinite;
+}
+
+@keyframes move {
+  0% { left: 0; }
+  100% { left: 100%; }
+}
+
+#Music {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  background: #FFB74D;
+  color: #000;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 0 10px #FFB74D;
+}
+
+@media (max-width: 600px) {
+  .Parg {
+    padding: 0 1rem;
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .Type {
+    font-size: 1rem;
+  }
+}
+
+  </style>
+</head>
+<body onclick="m()">
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="Task.html">Task</a>
+    <a href="contact.html">Contact</a>
+    <a href="Class.html">Class</a>
+    <a href="AboutMe.html" class="Act">About Me</a>
+    <a href="saynotdrug.html">Say No Drugs</a>
+  </nav>  <img src="/IMG_20250505_150713.png" id="img">
+  <h1>Welcome</h1>
+  <p class="Type">My name is <span></span></p>
+  <p class="Parg">
+    I’m a passionate Hacker, Web Designer, Front-End Developer, Game Developer, Prompt Engineer, and Security Researcher. I specialize in exploit development using Python and C, with a strong focus on offensive security and vulnerability research. My hobbies revolve around hacking and constantly learning new technologies. My ultimate goals are <strong>reaching Jannah and seeing Allah</strong>. I aim to lead an elite APT team, become a top-tier zero-day researcher, and achieve both technical mastery and spiritual success.
+  </p>  <img id="runner" src="/assets/Run__000.png" alt="Running Animation" width="100">
+  <button onclick="m()" type="submit" id="Music">Music Off</button>  <script>
+    const runner = document.getElementById("runner");
+    let frame = 0;
+
+    setInterval(() => {
+      const frameStr = frame.toString().padStart(3, '0');
+      runner.src = `/assets/Run__${frameStr}.png`;
+      frame = (frame + 1) % 10;
+    }, 100);
+
+    function m() {
+      const jumpSound = new Audio('/assets/Background.mp3');
+      jumpSound.play();
+      document.getElementById("Music").innerText = "Music On";
+    }
+  </script>  <img src="https://media0.giphy.com/media/5sOxO48ipF08mSK9hu/giphy.gif" style="display:block; margin:2rem auto; max-width:100%;">
+</body>
+</html>

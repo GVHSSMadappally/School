@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Curriculum Generator Tool</title>
+  <style>
+    body {
+      background: #121212;
+      color: #fff;
+      font-family: monospace;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+      color: #4fc3f7;
+      margin-bottom: 1rem;
+    }
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      background: #1e1e1e;
+      border: 1px solid #4fc3f7;
+      color: #fff;
+      border-radius: 6px;
+      margin-top: 0.25rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background: #ff7043;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 1rem;
+    }
+    pre {
+      background: #1e1e1e;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <h1>Curriculum Builder Tool</h1>
+
+  <div class="form-group">
+    <label>Class</label>
+    <input type="text" id="classInput" placeholder="e.g. 5">
+  </div>
+  <div class="form-group">
+    <label>Subject</label>
+    <input type="text" id="subjectInput" placeholder="e.g. Math">
+  </div>
+  <div class="form-group">
+    <label>Chapter Title</label>
+    <input type="text" id="chapterInput" placeholder="e.g. Addition Basics">
+  </div>
+  <div class="form-group">
+    <label>YouTube Link (embed or normal)</label>
+    <input type="text" id="linkInput" placeholder="e.g. https://www.youtube.com/embed/abc123">
+  </div>
+  <button onclick="addEntry()">Add to Curriculum</button>
+
+  <pre id="output">const curriculum = {};</pre>
+
+  <script>
+    let curriculum = {};
+
+    function cleanLink(link) {
+      // Convert regular YouTube link to embed if needed
+      const match = link.match(/(?:youtu\.be\/|youtube\.com\/watch\?v=)([\w\-]+)/);
+      return match ? `https://www.youtube.com/embed/${match[1]}` : link;
+    }
+
+    function addEntry() {
+      const cls = document.getElementById('classInput').value.trim();
+      const subject = document.getElementById('subjectInput').value.trim();
+      const chapter = document.getElementById('chapterInput').value.trim();
+      const rawLink = document.getElementById('linkInput').value.trim();
+      const link = cleanLink(rawLink);
+
+      if (!cls || !subject || !chapter || !link) {
+        alert("All fields are required!");
+        return;
+      }
+
+      if (!curriculum[cls]) curriculum[cls] = {};
+      if (!curriculum[cls][subject]) curriculum[cls][subject] = {};
+      curriculum[cls][subject][chapter] = link;
+
+      renderOutput();
+      clearForm();
+    }
+
+    function renderOutput() {
+      const formatted = JSON.stringify(curriculum, null, 2)
+        .replace(/"(\w+)"\s*:/g, '$1:') // remove quotes from keys
+        .replace(/"https:\/\/www\.youtube\.com\/embed\//g, '"https://www.youtube.com/embed/');
+      document.getElementById('output').textContent = `const curriculum = ${formatted};`;
+    }
+
+    function clearForm() {
+      document.getElementById('chapterInput').value = '';
+      document.getElementById('linkInput').value = '';
+    }
+  </script>
+</body>
+</html>

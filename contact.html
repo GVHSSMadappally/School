@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact | GVHSS Madapally</title>
+  <style>
+    :root {
+      --primary: #ffb74d;
+      --secondary: #ffbfbf;
+      --bg-light: #f4f4f4;
+      --text-light: #1e1e1e;
+      --bg-dark: #121212;
+      --text-dark: #ffffff;
+      --accent: #ff4444;
+      --card-bg-light: #ffffff;
+      --card-bg-dark: #1e1e1e;
+      --radius: 16px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { min-height: 100vh; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg-dark); color: var(--text-dark); transition: background-color .3s, color .3s; }
+    body.light { background-color: var(--bg-light); color: var(--text-light); }
+    header { text-align: center; padding: 2rem 1rem; animation: slideFadeIn 1s ease; }
+    header h1 { font-size: 2.5rem; color: var(--primary); }
+    nav { display: flex; justify-content: center; gap: 1rem; padding: 1rem; flex-wrap: wrap; }
+    nav a { position: relative; text-decoration: none; color: var(--primary); padding: .5em 1em; transition: color .3s; }
+    nav a::after { content: ''; position: absolute; left: 0; bottom: -2px; width: 0; height: 2px; background: var(--accent); transition: width .3s; }
+    nav a:hover::after { width: 100%; }
+    nav a.active { color: var(--accent); }
+    body.light nav a.active { color: var(--accent); }
+    .toggle-btn { position: fixed; top: 20px; right: 20px; padding: .5em 1em; background: var(--primary); color: #000; border: none; border-radius: var(--radius); cursor: pointer; z-index: 100; }
+    main { max-width: 800px; margin: 2rem auto; padding: 1rem; }
+    .contact-card { background: var(--card-bg-dark); border-radius: var(--radius); padding: 2rem; box-shadow: 0 6px 12px rgba(0,0,0,0.2); animation: fadeInUp 1s ease; }
+    body.light .contact-card { background: var(--card-bg-light); }
+    .contact-card h2 { color: var(--primary); margin-bottom: 1rem; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .contact-item { display: flex; flex-direction: column; }
+    .contact-item label { margin-bottom: .5rem; font-weight: 500; }
+    .contact-item input, .contact-item textarea { padding: .75em; border: 2px solid var(--secondary); border-radius: var(--radius); background: transparent; color: inherit; resize: vertical; }
+    .contact-item textarea { min-height: 120px; }
+    .btn-submit { margin-top: 1rem; padding: .75em 1.5em; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; transition: background .3s; }
+    .btn-submit:hover { background: #cc0000; }
+    .info { margin-top: 2rem; color: #ccc; font-size: .9rem; line-height: 1.4; }
+
+    .progress-container { margin-top: 1rem; }
+    .progress-bar { width: 100%; background: #333; height: 20px; border-radius: 10px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--primary); width: 0%; transition: width .3s; }
+
+    .checkbox-group { margin-top: 1rem; }
+    .checkbox-group label { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+    input[type="checkbox"] { transform: scale(1.2); }
+
+    @media (max-width: 600px) {
+      .contact-grid { grid-template-columns: 1fr; }
+      header h1 { font-size: 2rem; }
+    }
+
+    @keyframes fadeInUp { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+    @keyframes slideFadeIn { from { opacity:0; transform: translateY(-20px); } to { opacity:1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" id="themeToggle">Toggle Theme</button>
+  <header>
+    <h1>Contact Us</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Task.html">Tasks</a>
+      <a href="Class.html">Class</a>
+      <a href="Contact.html" class="active">Contact</a>
+      <a href="AboutMe.html">About Me</a>
+      <a href="saynotdrug.html">Say No Drugs</a>
+    </nav>
+  </header>
+  <main>
+    <div class="contact-card">
+      <h2>Get in Touch</h2>
+      <p>Fill out the form below or reach out directly.</p>
+      <form id="contactForm">
+        <div class="contact-grid">
+          <div class="contact-item">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required />
+          </div>
+          <div class="contact-item">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" placeholder="you@example.com" required />
+          </div>
+        </div>
+        <div class="contact-item">
+          <label for="message">Message</label>
+          <textarea id="message" placeholder="Write your message here" required></textarea>
+        </div>
+
+        <div class="checkbox-group">
+          <label><input type="checkbox" class="task-checkbox"> Step 1: Name entered</label>
+          <label><input type="checkbox" class="task-checkbox"> Step 2: Email entered</label>
+          <label><input type="checkbox" class="task-checkbox"> Step 3: Message written</label>
+        </div>
+
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Send Message</button>
+      </form>
+      <div class="info">
+        <p><strong>School:</strong> G.V.H.S.S Madapally</p>
+        <p><strong>Contact:</strong> Muhammad Nabhan (Cyberworrier) | +973 3822 1966</p>
+        <p><strong>Email:</strong> nabhan@cyberworrier.com</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const bodyEl = document.body;
+    if (localStorage.getItem('theme') === 'light') bodyEl.classList.add('light');
+    toggleBtn.addEventListener('click', () => {
+      bodyEl.classList.toggle('light');
+      localStorage.setItem('theme', bodyEl.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Progress bar tracking
+    const checkboxes = document.querySelectorAll('.task-checkbox');
+    const progressFill = document.getElementById('progressFill');
+    checkboxes.forEach(cb => cb.addEventListener('change', updateProgress));
+    function updateProgress() {
+      const total = checkboxes.length;
+      const completed = Array.from(checkboxes).filter(cb => cb.checked).length;
+      const percent = (completed / total) * 100;
+      progressFill.style.width = percent + '%';
+    }
+
+    // Telegram BOT integration
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const BOT_TOKEN = '';
+      const CHAT_ID = '';
+      const text = `**New Contact Submission**\n\n*Name:* ${name}\n*Email:* ${email}\n*Message:* ${message}`;
+
+      const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: text,
+          parse_mode: "Markdown"
+        })
+      }).then(res => {
+        if (res.ok) alert("Message sent successfully!");
+        else alert("Failed to send message.");
+      }).catch(err => alert("Error: " + err.message));
+    });
+  </script>
+</body>
+</html>

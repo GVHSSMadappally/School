@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Class Portal</title>
+  <style>
+    :root {
+      --primary: #4fc3f7;
+      --accent: #ff7043;
+      --bg-dark: #121212;
+      --text-dark: #ffffff;
+      --card-dark: #1e1e1e;
+      --radius: 12px;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      font-family: 'Segoe UI', sans-serif;
+      padding: 2rem;
+    }
+    h1 { text-align: center; color: var(--primary); margin-bottom: 1rem; }
+    .card {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--card-dark);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+    select, input {
+      width: 100%;
+      margin-bottom: 1rem;
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: inherit;
+    }
+    .btn-submit {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      flex: 1;
+    }
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    iframe {
+      width: 100%;
+      height: 360px;
+      margin-top: 2rem;
+      border-radius: var(--radius);
+    }
+    .action-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 1em;
+  gap: 1em;
+}
+
+.navbar a {
+  color: var(--highlight);
+  text-decoration: none;
+  font-size: 1rem;
+  border-bottom: 2px solid var(--border);
+  animation: fade 1s ease-in-out forwards;
+  opacity: 0;
+}
+@keyframes fade {
+  to { opacity: 1; }
+}
+  </style>
+</head>
+<body>
+  <div class="navbar">
+    <a href="Home.html">Home</a>
+    <a href="Task.html">Task</a>
+    <a href="Contact.html">Contact</a>
+    <a href="Class.html">Class</a>
+    <a href="AboutMe.html">About Me</a>
+    <a href="index.html">Say No Drugs</a>
+  </div> 
+  <h1>Class Learning Portal</h1>
+  <div class="card">
+    <label for="classSelect">Select Class</label>
+    <select id="classSelect">
+      <option value="">-- Choose Class --</option>
+      <option value="5">Class 5</option>
+      <option value="6">Class 6</option>
+      <option value="7">Class 7</option>
+      <option value="8">Class 8</option>
+      <option value="9">Class 9</option>
+      <option value="10">Class 10</option>
+    </select>
+
+    <label for="subjectSelect">Select Subject</label>
+    <select id="subjectSelect">
+      <option value="">-- Choose Subject --</option>
+    </select>
+
+    <input type="text" id="searchChapter" placeholder="Search chapter..."/>
+
+    <label for="chapterSelect">Select Chapter</label>
+    <select id="chapterSelect">
+      <option value="">-- Select Chapter --</option>
+    </select>
+
+    <div class="action-buttons">
+      <button id="watchBtn" disabled class="btn-submit">Watch Video</button>
+      <button id="quizBtn" disabled class="btn-submit">Take Quiz</button>
+      <button id="downloadBtn" disabled class="btn-submit">Download Worksheet</button>
+      <button id="bookmarkBtn" disabled class="btn-submit">Bookmark</button>
+    </div>
+
+    <div id="videoContainer"></div>
+  </div>
+
+  <script>
+    alert("This Page Is under Development. Comming Soon.... this usefull for all students.")
+
+    const classSelect = document.getElementById('classSelect');
+    const subjectSelect = document.getElementById('subjectSelect');
+    const chapterSelect = document.getElementById('chapterSelect');
+    const searchInput = document.getElementById('searchChapter');
+    const watchBtn = document.getElementById('watchBtn');
+    const quizBtn = document.getElementById('quizBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const bookmarkBtn = document.getElementById('bookmarkBtn');
+    const videoContainer = document.getElementById('videoContainer');
+
+    classSelect.addEventListener('change', () => {
+      subjectSelect.innerHTML = '<option value="">-- Choose Subject --</option>';
+      chapterSelect.innerHTML = '<option value="">-- Select Chapter --</option>';
+      videoContainer.innerHTML = '';
+      const selectedClass = classSelect.value;
+      if (curriculum[selectedClass]) {
+        Object.keys(curriculum[selectedClass]).forEach(subject => {
+          const option = document.createElement('option');
+          option.value = subject;
+          option.textContent = subject;
+          subjectSelect.appendChild(option);
+        });
+      }
+    });
+
+    subjectSelect.addEventListener('change', () => {
+      chapterSelect.innerHTML = '<option value="">-- Select Chapter --</option>';
+      videoContainer.innerHTML = '';
+      const cls = classSelect.value;
+      const sub = subjectSelect.value;
+      if (curriculum[cls]?.[sub]) {
+        Object.keys(curriculum[cls][sub]).forEach(chap => {
+          const opt = document.createElement('option');
+          opt.value = chap;
+          opt.textContent = chap;
+          chapterSelect.appendChild(opt);
+        });
+      }
+    });
+
+    chapterSelect.addEventListener('change', () => {
+      const cls = classSelect.value;
+      const sub = subjectSelect.value;
+      const chap = chapterSelect.value;
+      const video = curriculum[cls]?.[sub]?.[chap];
+
+      if (video) {
+        watchBtn.disabled = false;
+        quizBtn.disabled = false;
+        downloadBtn.disabled = false;
+        bookmarkBtn.disabled = false;
+
+        watchBtn.onclick = () => {
+          videoContainer.innerHTML = `
+            <iframe src="${video}" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+          `;
+        };
+
+        quizBtn.onclick = () => {
+          alert('Quiz for "' + chap + '" (Feature coming soon or link externally)');
+        };
+
+        downloadBtn.onclick = () => {
+          const filename = chap.replace(/\s+/g, '_') + '.pdf';
+          const fakeURL = `worksheets/${filename}`;
+          window.open(fakeURL, '_blank');
+        };
+
+        bookmarkBtn.onclick = () => {
+          localStorage.setItem('bookmark', JSON.stringify({ class: cls, subject: sub, chapter: chap }));
+          alert(`Bookmarked: Class ${cls} - ${sub} - ${chap}`);
+        };
+      }
+    });
+
+    searchInput.addEventListener('input', () => {
+      const filter = searchInput.value.toLowerCase();
+      const cls = classSelect.value;
+      const sub = subjectSelect.value;
+
+      if (curriculum[cls]?.[sub]) {
+        chapterSelect.innerHTML = '<option value="">-- Select Chapter --</option>';
+        Object.keys(curriculum[cls][sub]).forEach(chap => {
+          if (chap.toLowerCase().includes(filter)) {
+            const opt = document.createElement('option');
+            opt.value = chap;
+            opt.textContent = chap;
+            chapterSelect.appendChild(opt);
+          }
+        });
+      }
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const saved = JSON.parse(localStorage.getItem('bookmark'));
+      if (saved) {
+        alert(`Welcome back. You bookmarked: Class ${saved.class} - ${saved.subject} - ${saved.chapter}`);
+      }
+    });
+  </script>
+</body>
+</html>

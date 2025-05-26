@@ -1,0 +1,189 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Say No To Drugs</title>
+  <style>
+    :root {
+      --bg: #f9f9f9;
+      --text: #111;
+      --accent: #4caf50;
+      --highlight: #ffc107;
+      --radius: 8px;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden;
+    }
+    .navbar {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background-color: #fff;
+      border-bottom: 2px solid var(--border, #ddd);
+    }
+    .navbar a {
+      color: var(--accent);
+      text-decoration: none;
+      padding: 0.5em;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .navbar a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s;
+    }
+    .navbar a:hover::after {
+      width: 100%;
+    }
+    .hero {
+      text-align: center;
+      padding: 2rem 1rem;
+      animation: fadeIn 1s ease;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      color: var(--accent);
+      animation: slideDown 1s ease;
+    }
+    .hero p {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    .translate-btn {
+      display: block;
+      margin: 1rem auto;
+      padding: 0.6em 1.2em;
+      background: var(--highlight);
+      color: #000;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .runner {
+      display: block;
+      margin: 2rem auto;
+      width: 120px;
+      animation: runLoop 4s linear infinite;
+    }
+    .disclaimer {
+      max-width: 700px;
+      margin: 2rem auto;
+      background: #fff;
+      border-left: 6px solid var(--highlight);
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      animation: fadeInUp 1s ease;
+    }
+    .disclaimer h2 {
+      color: var(--highlight);
+      margin-bottom: 0.5rem;
+    }
+    .disclaimer p {
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .saynodrug {
+      display: block;
+      margin: 2rem auto;
+      width: 200px;
+      animation: bounce 2s infinite;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #777;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes runLoop {
+      0% { transform: translateX(-150px); }
+      100% { transform: translateX(calc(100vw + 150px)); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .disclaimer { margin: 1rem; }
+      .runner { width: 80px; }
+      .saynodrug { width: 150px; }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const friendName = prompt('Enter your name:');
+    document.documentElement.dataset.friend = friendName;
+  </script>
+  <div class="navbar">
+    <a href="index.html">Home</a>
+    <a href="Task.html" class="active">Tasks</a>
+    <a href="Contact.html">Contact</a>
+    <a href="Class.html">Class</a>
+    <a href="AboutMe.html">About Dev</a>
+    <a href="saynotdrug.html">Say No Drugs</a>
+  </div>
+  <section class="hero">
+    <h1>Hello friend <span id="friendName"></span>!</h1>
+    <p id="welcomeText">Welcome to our safe space. Together, we make wise choices every day.</p>
+    <button class="translate-btn" onclick="translateMalayalam()">Translate Malayalam</button>
+  </section>
+  <img src="/assets/Run__000.png" alt="Running student" class="runner" id="runner">
+  <section class="disclaimer">
+    <h2 id="disclaimerTitle">Disclaimer</h2>
+    <p id="disclaimerText">My name is Drug. I am the bad one. I have destroyed many lives. If you consume me, I will spoil your future, your health, and your happiness. But if you avoid me, you can enjoy your life with strength, clarity, and freedom. I may try to enter your life, but if you are wise and strong, you will reject me. Choose life. Choose success. Say no to drugs, and say yes to a bright future.</p>
+  </section>
+  <img src="/assets/saynodrug.png" alt="Say No Drug" class="saynodrug">
+  <footer>
+    Designed by Muhammad Nabhan (Cyberworrier)<br>
+    Support: +973 3822 1966
+  </footer>
+  <script>
+    // Insert friend's name
+    document.getElementById('friendName').innerText = document.documentElement.dataset.friend || '';// Runner animation frames
+const runner = document.getElementById('runner');
+let frame = 0;
+setInterval(() => {
+  runner.src = `/assets/Run__${String(frame).padStart(3,'0')}.png`;
+  frame = (frame + 1) % 10;
+}, 100);
+
+function translateMalayalam() {
+  document.getElementById('welcomeText').innerText = 'സ്വാഗതം! നാം ഒരുമിച്ച് ഓരോ ദിവസവും ബുദ്ധിമുട്ടുകൾ മാറ്റി നല്ല തീരുമാനങ്ങൾ എടുക്കുന്നു.';
+  document.getElementById('disclaimerTitle').innerText = 'ഉറച്ച മുന്നറിയിപ്പ്';
+  document.getElementById('disclaimerText').innerText = 'എന്റെ പേര് മയക്കുമരുന്നാണ്. ഞാൻ ഒരു മോശം കഥാപാത്രമാണ്. ഞാൻ അനേകം ജീവിതങ്ങൾ നശിപ്പിച്ചിട്ടുണ്ട്. നീ എന്നെ ഉപയോഗിച്ചാൽ, നിന്റെ ഭാവിയും ആരോഗ്യമും സന്തോഷവും നശിക്കും. എന്നെ ഒഴിവാക്കി നീ ജീവിച്ചാൽ, നീ ശക്തിയോടെ, വ്യക്തതയോടെ, സ്വാതന്ത്ര്യത്തോടെ ജീവിക്കാം. ഞാൻ നിന്റെ ജീവിതത്തിലേക്ക് കയറാൻ ശ്രമിക്കും, പക്ഷേ നീ ബുദ്ധിയുള്ളവനും ശക്തിയുള്ളവനുമാണെങ്കിൽ, നീ എന്നെ തള്ളിക്കളയും. ജീവിതത്തെ തിരഞ്ഞെടുക്കൂ. വിജയത്തെ തിരഞ്ഞെടുക്കൂ. മയക്കുമരുന്നുകളെ നിരസിക്കൂ, ഉജ്ജ്വലമായ ഭാവിയെ സ്വീകരിക്കൂ.';
+}
+
+  </script>
+</body>
+</html>

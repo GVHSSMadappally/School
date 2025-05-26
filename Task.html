@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Task | All Day Task</title>
+  <style>
+    :root {
+      --primary: #ffb74d;
+      --secondary: #ffbfbf;
+      --bg-light: #f4f4f4;
+      --text-light: #1e1e1e;
+      --bg-dark: #121212;
+      --text-dark: #ffffff;
+      --accent: #ff4444;
+      --card-bg-light: #ffffff;
+      --card-bg-dark: #1e1e1e;
+      --radius: 16px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family:'Segoe UI',sans-serif; background-color:var(--bg-dark); color:var(--text-dark); transition:background-color .3s,color .3s; }
+    body.light { background-color:var(--bg-light); color:var(--text-light); }
+    header { text-align:center; padding:2rem 1rem 1rem; animation:slideFadeIn 1.2s ease-in-out; }
+    header h1 { font-size:2.5rem; color:var(--primary); }
+    nav { display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; padding:1rem; }
+    nav a { padding:.6em 1.2em; color:var(--primary); text-decoration:none; border-bottom:2px solid var(--primary); position:relative; transition:color .3s; }
+    nav a::after { content:''; position:absolute; left:0; bottom:-2px; width:0; height:2px; background-color:var(--accent); transition:width .3s ease-in-out; }
+    nav a:hover::after { width:100%; }
+    nav a.active { color:var(--accent); border-color:var(--secondary); background-color:var(--card-bg-dark); border-radius:var(--radius); }
+    body.light nav a.active { background-color:var(--card-bg-light); }
+    .toggle-btn { position:fixed; top:20px; right:20px; padding:.5em 1em; background-color:var(--primary); color:#000; border:none; border-radius:var(--radius); cursor:pointer; z-index:999; transition:background-color .3s; }
+
+    .progress-wrapper { max-width: 600px; margin: 0 auto 2rem; padding: 0 1rem; }
+    .progress-bar-container { background: #333; border-radius: var(--radius); overflow: hidden; height: 20px; }
+    .progress-bar-fill { height: 100%; width: 0%; background-color: var(--accent); transition: width 0.3s ease; }
+
+    .container { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; padding:2rem; }
+    .card { opacity:0; transform:translateY(40px); background-color:var(--card-bg-dark); border-radius:var(--radius); box-shadow:0 6px 12px rgba(0,0,0,0.2); overflow:hidden; transition:transform .4s ease,opacity .4s ease; cursor:pointer; position:relative; }
+    body.light .card { background-color:var(--card-bg-light); }
+    .card.show { opacity:1; transform:translateY(0); }
+    .card img { width:100%; display:block; height:auto; }
+    .card-content { padding:1rem; }
+    .card-content h2 { color:var(--primary); margin-bottom:.5rem; }
+    .card-content h4 { font-size:1.1rem; margin-bottom:.5rem; }
+    .card-content p { font-size:.95rem; color:#ccc; }
+    body.light .card-content p { color:#333; }
+    .card input[type="checkbox"] {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      transform: scale(1.3);
+      cursor: pointer;
+    }
+
+    /* Modal */
+    .modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:flex; justify-content:center; align-items:center; opacity:0; visibility:hidden; transition:opacity .3s; }
+    .modal.show { opacity:1; visibility:visible; }
+    .modal-content { background:var(--card-bg-dark); padding:2rem; border-radius:var(--radius); max-width:90%; max-height:80%; overflow:auto; text-align:center; }
+    body.light .modal-content { background:var(--card-bg-light); }
+    .modal-content h3 { color:var(--accent); margin-bottom:1rem; }
+    .modal-content p { color:inherit; line-height:1.5; }
+    .modal-content button { margin-top:1rem; padding:.5em 1em; background:var(--primary); border:none; border-radius:var(--radius); cursor:pointer; }
+
+    @media(max-width:500px){
+      header h1{ font-size:1.8rem;}
+      nav a{ font-size:.9rem;}
+      .toggle-btn{ font-size:.9rem;}
+    }
+
+    @keyframes slideFadeIn{ from{opacity:0;transform:translateY(-30px);}to{opacity:1;transform:translateY(0);} }
+  </style>
+</head>
+<body>
+  <button class="toggle-btn" id="themeToggle">Dark Mode</button>
+  <header><h1>All Day Task & Challenges</h1></header>
+
+  <div class="progress-wrapper">
+    <div class="progress-bar-container">
+      <div class="progress-bar-fill" id="progressBar"></div>
+    </div>
+  </div>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="Task.html" class="active">Tasks</a>
+    <a href="Contact.html">Contact</a>
+    <a href="Class.html">Class</a>
+    <a href="AboutMe.html">About Dev</a>
+    <a href="saynotdrug.html">Say No Drugs</a>
+  </nav>
+
+  <div class="container" id="taskContainer"></div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content" id="modalContent">
+      <h3 id="modalTitle"></h3>
+      <p id="modalBenefit"></p>
+      <p id="modalTip" style="margin-top: 1rem; color: var(--secondary); font-style: italic;"></p>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const toggleBtn = document.getElementById('themeToggle');
+    const bodyEl = document.body;
+    if(localStorage.getItem('theme')==='light') bodyEl.classList.add('light');
+    toggleBtn.addEventListener('click',()=>{
+      bodyEl.classList.toggle('light');
+      localStorage.setItem('theme',bodyEl.classList.contains('light')?'light':'dark');
+    });
+
+    const tasks = [
+      {
+        title:'Avoid Sugar',
+        subtitle:'Boost clarity',
+        notes:'Skip sugary drinks today.',
+        img:'/assets/Sugar.jpeg',
+        benefit:'Enhances focus, stabilizes mood, and supports healthy weight.',
+        tip:'Take sugar in very small amounts throughout the day, preferably natural sources like fruits.'
+      },
+      {
+        title:'Morning Stretch',
+        subtitle:'Wake up muscles',
+        notes:'10-minute full-body stretch.',
+        img:'/assets/MorningStretch.jpg',
+        benefit:'Increases flexibility, improves circulation, reduces injury risk.',
+        tip:'Stretch right after waking up, hold each stretch for 30 seconds.'
+      },
+      {
+        title:'Pushups',
+        subtitle:'Build strength',
+        notes:'3 sets of 15 reps.',
+        img:'/assets/Pushup.png',
+        benefit:'Strengthens chest, arms, and core, boosts metabolism.',
+        tip:'Keep your back straight, engage your core, exhale as you push.'
+      },
+      {
+        title:'Read Chapter',
+        subtitle:'Study goal',
+        notes:'Read 20 pages of science.',
+        img:'/assets/ReadChapter.png',
+        benefit:'Expands knowledge, improves comprehension, and critical thinking.',
+        tip:'Read in a quiet place. Summarize key points after reading.'
+      },
+      {
+        title:'Meditate',
+        subtitle:'Mind break',
+        notes:'5 minutes mindfulness.',
+        img:'/assets/Meditation.jpg',
+        benefit:'Reduces stress, enhances concentration, and emotional health.',
+        tip:'Close your eyes. Focus on breathing. Let thoughts pass like clouds.'
+      },
+      {
+        title:'Hydrate',
+        subtitle:'Drink water',
+        notes:'8 glasses minimum.',
+        img:'/assets/Water.jpg',
+        benefit:'Supports digestion, energy levels, and cognitive function.',
+        tip:'Carry a water bottle. Drink 1 glass every 2 hours.'
+      },
+      {
+        title:'Journal',
+        subtitle:'Reflect thoughts',
+        notes:'Write 3 things you’re grateful for.',
+        img:'/assets/journal.png',
+        benefit:'Boosts mood, self-awareness, and goal clarity.',
+        tip:'Be honest. Write as if you talk to your future self.'
+      },
+      {
+        title:'Learn maths',
+        subtitle:'Skill up',
+        notes:'Practice 30 minutes of maths.',
+        img:'/assets/Learnmaths.png',
+        benefit:'Enhances problem-solving, logic, and improves daily life.',
+        tip:'Focus on one topic. Practice with pen & paper.'
+      }
+    ];
+
+    const container = document.getElementById('taskContainer');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBenefit = document.getElementById('modalBenefit');
+    const modalTip = document.getElementById('modalTip');
+    const progressBar = document.getElementById('progressBar');
+
+    function render() {
+      container.innerHTML = '';
+      tasks.forEach((t, i) => {
+        const c = document.createElement('div');
+        c.className = 'card';
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.addEventListener('click', (e) => {
+          e.stopPropagation();
+          t.completed = checkbox.checked;
+          updateProgress();
+        });
+
+        c.appendChild(checkbox);
+        c.innerHTML += `
+          <img src="${t.img}" alt="${t.title}">
+          <div class="card-content">
+            <h2>${t.title}</h2>
+            <h4>${t.subtitle}</h4>
+            <p>${t.notes}</p>
+          </div>
+        `;
+        c.addEventListener('click', () => openModal(t));
+        container.appendChild(c);
+      });
+      reveal();
+    }
+
+    function reveal() {
+      document.querySelectorAll('.card').forEach(c => {
+        if (c.getBoundingClientRect().top < window.innerHeight * 0.85) {
+          c.classList.add('show');
+        }
+      });
+    }
+
+    function openModal(task) {
+      modalTitle.innerText = task.title;
+      modalBenefit.innerText = task.benefit;
+      modalTip.innerText = task.tip ? `💡 ${task.tip}` : '';
+      modal.classList.add('show');
+    }
+
+    function closeModal() {
+      modal.classList.remove('show');
+    }
+
+    function updateProgress() {
+      const completed = tasks.filter(t => t.completed).length;
+      const total = tasks.length;
+      const percent = Math.round((completed / total) * 100);
+      progressBar.style.width = percent + '%';
+    }
+
+    window.addEventListener('scroll', reveal);
+    render();
+  </script>
+</body>
+</html>
