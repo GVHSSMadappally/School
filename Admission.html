@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admission | GVHSS Madapally</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --text: #ffffffcc;
+      --highlight: #FFB74D;
+      --accent: #FF4081;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .coming-soon {
+      animation: fadeIn 2s ease-in-out forwards;
+      opacity: 0;
+      max-width: 600px;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--highlight);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+    }
+
+    .dev-credit {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="coming-soon">
+    <h1>Admission Portal</h1>
+    <p>This page is currently under development.<br>We are working hard to bring you a better experience.</p>
+    <p>See you soon!</p>
+    <div class="dev-credit">— Developer: Nabhan Making</div>
+  </div>
+</body>
+</html>
