@@ -158,12 +158,12 @@
     <p id="welcomeText">Welcome to our safe space. Together, we make wise choices every day.</p>
     <button class="translate-btn" onclick="translateMalayalam()">Translate Malayalam</button>
   </section>
-  <img src="/assets/Run__000.png" alt="Running student" class="runner" id="runner">
+  <img src="/Run__000.png" alt="Running student" class="runner" id="runner">
   <section class="disclaimer">
     <h2 id="disclaimerTitle">Disclaimer</h2>
     <p id="disclaimerText">My name is Drug. I am the bad one. I have destroyed many lives. If you consume me, I will spoil your future, your health, and your happiness. But if you avoid me, you can enjoy your life with strength, clarity, and freedom. I may try to enter your life, but if you are wise and strong, you will reject me. Choose life. Choose success. Say no to drugs, and say yes to a bright future.</p>
   </section>
-  <img src="/assets/saynodrug.png" alt="Say No Drug" class="saynodrug">
+  <img src="/saynodrug.png" alt="Say No Drug" class="saynodrug">
   <footer>
     Designed by Muhammad Nabhan (Cyberworrier)<br>
     Support: +973 3822 1966
@@ -174,7 +174,7 @@
 const runner = document.getElementById('runner');
 let frame = 0;
 setInterval(() => {
-  runner.src = `/assets/Run__${String(frame).padStart(3,'0')}.png`;
+  runner.src = `/Run__${String(frame).padStart(3,'0')}.png`;
   frame = (frame + 1) % 10;
 }, 100);
 
