@@ -1,164 +1,217 @@
-<!DOCTYPE html><html lang="ml">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>G.V.H.S.S Madapally</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>G.V.H.S.S Madapally – Empowering Futures</title>
   <style>
     :root {
-      --bg-dark: #121212;
-      --text-light: #FFFFFFC9;
-      --highlight: #FFB74D;
-      --border: #FFBFBF;
-      --box: #1E1E1E;
-    }body {
-  margin: 0;
-  padding: 0;
-  background: var(--bg-dark);
-  color: var(--text-light);
-  font-family: 'Segoe UI', sans-serif;
-  overflow-x: hidden;
-}
-
-.navbar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 1em;
-  gap: 1em;
-}
-
-.navbar a {
-  color: var(--highlight);
-  text-decoration: none;
-  font-size: 1rem;
-  border-bottom: 2px solid var(--border);
-  animation: fade 1s ease-in-out forwards;
-  opacity: 0;
-}
-
-@keyframes fade {
-  to { opacity: 1; }
-}
-
-h4.Type span {
-  display: inline-block;
-  overflow: hidden;
-  border-right: .15em solid #FFF;
-  white-space: nowrap;
-  animation: typing 4s steps(30, end), blink .75s step-end infinite;
-}
-
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink {
-  from, to { border-color: transparent }
-  50% { border-color: white; }
-}
-
-h4 {
-  text-align: center;
-  font-family: fantasy;
-  font-size: 1.8rem;
-  margin-top: 1rem;
-  animation: slideIn 1s ease-in-out;
-}
-
-@keyframes slideIn {
-  from { transform: translateY(-20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
-
-.info {
-  background: var(--box);
-  padding: 2rem;
-  margin: 2rem auto;
-  border-radius: 10px;
-  max-width: 900px;
-  line-height: 1.8;
-  animation: fadeUp 1.5s ease-in-out;
-}
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.info h2, .info h3 {
-  color: var(--highlight);
-  margin-top: 2rem;
-}
-
-.translate {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.translation {
-  background: #2A2A2A;
-  padding: 1rem;
-  border-left: 4px solid var(--highlight);
-  border-radius: 5px;
-}
-
-@media screen and (max-width: 600px) {
-  .navbar a { font-size: 0.9rem; }
-  .info { padding: 1rem; }
-}
-
+      --bg-dark: #0d0d0d;
+      --text-light: #f0f0f0;
+      --highlight: #ffca28;
+      --border: #ffab91;
+      --box: #1a1a1a;
+      --transition: 0.3s ease;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    nav {
+      background: var(--box);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 1rem;
+      gap: 1rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+    nav a {
+      color: var(--highlight);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: background var(--transition);
+    }
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    header {
+      text-align: center;
+      padding: 4rem 1rem 2rem;
+    }
+    .hero-title {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--highlight);
+      animation: slideIn 1s ease-out;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+      animation: fadeUp 1.2s ease-out;
+    }
+    .cta {
+      display: inline-block;
+      background: var(--highlight);
+      color: var(--bg-dark);
+      font-weight: bold;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform var(--transition);
+    }
+    .cta:hover {
+      transform: scale(1.05);
+    }
+    section.info {
+      background: var(--box);
+      margin: 2rem auto;
+      padding: 2rem;
+      border-radius: 10px;
+      max-width: 960px;
+      animation: fadeUp 1.5s ease-in-out;
+    }
+    section.info h2,
+    section.info h3 {
+      color: var(--highlight);
+      margin-top: 1.5rem;
+    }
+    .translate-controls {
+      margin-top: 1rem;
+      text-align: right;
+    }
+    .translate-controls button {
+      background: transparent;
+      border: 2px solid var(--highlight);
+      color: var(--highlight);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+    }
+    .translate-controls button.active,
+    .translate-controls button:hover {
+      background: var(--highlight);
+      color: var(--bg-dark);
+    }
+    .translation {
+      display: none;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-left: 4px solid var(--highlight);
+      background: #2a2a2a;
+      border-radius: 4px;
+    }
+    .translation.show {
+      display: block;
+    }
+    @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 600px) {
+      .hero-title { font-size: 2rem; }
+      .hero-subtitle { font-size: 1rem; }
+      nav a { font-size: 0.9rem; }
+      section.info { padding: 1rem; }
+    }
   </style>
 </head>
 <body>
-  <div class="navbar">
+  <nav>
     <a href="index.html">Home</a>
     <a href="Task.html">Task</a>
     <a href="Contact.html">Contact</a>
     <a href="Class.html">Class</a>
     <a href="AboutMe.html">About Me</a>
     <a href="saynotdrug.html">Say No Drugs</a>
-  </div>  <h4 class="Type"><span>G.V.H.S.S Madapally</span></h4>  <div class="info">
-    <h2>About G.V.H.S.S Madapally</h2>
-    <div class="translate">
-      <div class="translation">
-        <strong>English:</strong> G.V.H.S.S Madapally, established in 1924, is a government-run boys-only school managed by the Department of Education. Located in the rural region of Vatakara, Kozhikode, Kerala, the school offers education from grades 5 to 12 in Malayalam medium. It has 12 well-maintained classrooms, 2 staff rooms, a separate headmaster's office, and a pucca boundary wall. With 30 functional computers, a library of 20,000 books, a playground, and essential amenities like electricity and well water, the school also provides a midday meal prepared on campus. The academic year begins in April.
-      </div>
-      <div class="translation">
-        <strong>Malayalam:</strong> ജി.വി.എച്ച്.എസ്.എസ് മടപ്പള്ളി 1924-ല്‍ സ്ഥാപിക്കപ്പെട്ടു. വിദ്യാഭ്യാസ വകുപ്പ് ഭരണച്ചുമതലയുള്ള ഈ സര്‍ക്കാര്‍ വിദ്യാലയം കോഴിക്കോട് ജില്ലയിലെ വടകരയിലെ ഗ്രാമപ്രദേശത്താണ് സ്ഥിതിചെയ്യുന്നത്. അഞ്ചാം ക്ലാസ്സില്‍ നിന്നും പന്ത്രണ്ടാം ക്ലാസ്സ് വരെ മലയാളം മാദ്ധ്യമത്തിലൂടെ വിദ്യാഭ്യാസം നല്‍കുന്നു. 12 ക്ലാസ്മുറികള്‍, 2 അധ്യാപക മുറികള്‍, ഹെഡ്മാസ്റ്ററുടെ ഓഫീസും പക്ക.boundary wall ഉം ഉള്‍പ്പെടെ എല്ലാ അടിസ്ഥാന സൗകര്യങ്ങളും സ്‌കൂളില്‍ ഒരുക്കിയിട്ടുണ്ട്. 30 പ്രവര്‍ത്തനക്ഷമമായ കമ്പ്യൂട്ടറുകളും, 20,000 പുസ്തകങ്ങളുള്ള ഗ്രന്ഥശാലയും, കളിസ്ഥലവും, വൈദ്യുതി, കിണറ്റുനീര്‍, മിഡ്-ഡേ മീല്‍ അടക്കമുള്ള സൗകര്യങ്ങളും ഉണ്ട്. അധ്യായന വര്‍ഷം ഏപ്രിലിലാണ് തുടങ്ങുന്നത്.
-      </div>
-    </div><h3>Contact & Codes</h3>
-<p><strong>Address:</strong> Madappally College P.O, Kozhikode – 673102<br>
-<strong>Phone:</strong> 0496 2521240<br>
-<strong>Email:</strong> vadakara16011@gmail.com</p>
+  </nav>  <header>
+    <h1 class="hero-title">Welcome to G.V.H.S.S Madapally</h1>
+    <p class="hero-subtitle">Empowering tomorrow’s leaders, innovators, and visionaries. From grades 5–12, every student embarks on a journey of excellence, integrity, and boundless opportunity.</p>
+    <a href="Admission.html" class="cta">Enroll Now(admision)</a>
+  </header>  <section class="info">
+    <div class="translate-controls">
+      <button id="btn-en" class="active">English</button>
+      <button id="btn-ml">മലയാളം</button>
+    </div>
+    <article id="content-en" class="translation show">
+      <h2>About Our Legacy</h2>
+      <p>Founded in 1924, G.V.H.S.S Madapally stands as a beacon of academic prowess and holistic development in rural Kozhikode, Kerala. Managed by the Department of Education, our institution nurtures young minds from grade 5 through grade 12, delivering a robust Malayalam-medium curriculum enriched with modern amenities and innovative pedagogy.</p>
+      <h3>Facilities & Resources</h3>
+      <ul>
+        <li>12 Spacious Classrooms with Smart Boards</li>
+        <li>30 High-Performance Computer Stations</li>
+        <li>Extensive Library Housing 20,000+ Volumes</li>
+        <li>Dedicated Science & Mathematics Laboratories</li>
+        <li>Well-Equipped Playground & Sports Complex</li>
+        <li>Reliable Electricity & Purified Well Water</li>
+        <li>Nutritious Midday Meal Prepared On-site</li>
+      </ul>
+      <h3>Quick Facts</h3>
+      <p><strong>Total Strength:</strong> 2,316 students (Boys: 1,556 | Girls: 760)<br>
+      <strong>Faculty:</strong> 104 Dedicated Educators<br>
+      <strong>Higher Secondary Stream:</strong> 647 Students<br>
+      <strong>Vocational Courses:</strong> 236 Enrolled</p>
+      <h3>Leadership & Contact</h3>
+      <p><strong>Principal:</strong> Mr. Gafoor<br>
+      <strong>VHSS Principal:</strong> Mr. Jayaprakash<br>
+      <strong>Vice Principal:</strong> Mr. Sajith Kallidukil<br>
+      <strong>Headmaster:</strong> Mr. Rajeevan N P</p>
+      <p><strong>Address:</strong> Madappally College P.O, Kozhikode – 673102<br>
+      <strong>Phone:</strong> 0496-2521240<br>
+      <strong>Email:</strong> vadakara16011@gmail.com</p>
+    </article><article id="content-ml" class="translation">
+  <h2>ഞങ്ങളുടെ ഇതിഹാസം</h2>
+  <p>1924-ൽ സ്ഥാപിതമായ ജി.വി.എച്ച്.എസ്.എസ് മടപ്പള്ളി, കോഴിക്കോട് ഗ്രാമപ്രദേശത്ത് വിദ്യാഭ്യാസത്തിന്റെ പ്രതീകമായി നിൽക്കുന്നു. വിദ്യാഭ്യാസ വകുപ്പ് നിയന്ത്രണത്തിലുള്ള ഈ സ്ഥാപനത്തിൽ അഞ്ചാം ക്ലാസ്സിൽനിന്ന് പന്ത്രണ്ടാം ക്ലാസ്സും ഉൾപ്പെടുത്തി സമഗ്രമായ വിദ്യാഭ്യാസം നൽകുന്നു.</p>
+  <h3>സൗകര്യങ്ങൾ & റിസോർസുകൾ</h3>
+  <ul>
+    <li>12 ക്ലാസ്മുറികൾ (സ്മാർട്ട് ബോർഡുകൾ ഉപയോഗിച്ച്)</li>
+    <li>30 ഹൈ-പെർഫോർമൻസ് കമ്പ്യൂട്ടർ സ്റ്റേഷനുകൾ</li>
+    <li>20,000+ പുസ്തകങ്ങൾ അടങ്ങിയ വിശാല ഗ്രന്ഥശാല</li>
+    <li>വൈജ്ഞാനിക & ഗണിതശാസ്ത്ര ലബോറട്ടറികൾ</li>
+    <li>പ്ലേഗ്രൗണ്ട് & സ്പോർട്സ് കോംപ്ലക്സ്</li>
+    <li>നിലവാരമുള്ള വൈദ്യുതി & പവിത്രതയുള്ള കിണറ്റുനീർ</li>
+    <li>സ്കൂളിൽ തന്നെ തയ്യാറാക്കുന്ന പോഷക ഭക്ഷണക്കാല ഭക്ഷണം</li>
+  </ul>
+  <h3>ശീഘ്ര സ്ഥിതിവിവരങ്ങൾ</h3>
+  <p><strong>ആകെ വിദ്യാർത്ഥികൾ:</strong> 2,316 (ആൺ: 1,556 | പെൺ: 760)<br>
+  <strong>അധ്യാപകർ:</strong> 104<br>
+  <strong>ഉയർന്നതല മാദ്ധ്യമം:</strong> 647<br>
+  <strong>വ്യവസായ കോഴ്സുകൾ:</strong> 236</p>
+  <h3>നേതൃത്വം & സമ്പർക്കം</h3>
+  <p><strong>പ്രിൻസിപ്പൽ:</strong> श्री. ഗഫൂർ<br>
+  <strong>VHSS പ്രിൻസിപ്പൽ:</strong> ശ്രീ. ജയപ്രകാശ്<br>
+  <strong>വൈസ് പ്രിൻസിപ്പൽ:</strong> ശ്രീ. സജിത്ത് കള്ളിടുകിൽ<br>
+  <strong>ഹെഡ്മാസ്റ്റർ:</strong> श्री. രാജീവൻ എന്‍.പി.</p>
+  <p><strong>വിലാസം:</strong> മടപ്പള്ളി കോളേജ് പി.ഒ, കോഴിക്കോട് – 673102<br>
+  <strong>ഫോൺ:</strong> 0496-2521240<br>
+  <strong>ഇമെയിൽ:</strong> vadakara16011@gmail.com</p>
+</article>
 
-<p><strong>Codes:</strong><br>
-School Code: 16011<br>
-HSS Code: 10008<br>
-VHSS Code: 911006<br>
-UDISE Code: 32041300113</p>
+  </section>  <script>
+    const btnEn = document.getElementById('btn-en');
+    const btnMl = document.getElementById('btn-ml');
+    const contentEn = document.getElementById('content-en');
+    const contentMl = document.getElementById('content-ml');
 
-<h3>Leadership</h3>
-<p>Principal: gafoor<br>
-VHSS Principal: Jayaprakash<br>
-Vice Principal: Sajith Kallidukil<br>
-Headmaster: Rajeevan N P<br>
-PTA President: Suneesh T<br>
-MPTA President: Praseetha M</p>
+    btnEn.addEventListener('click', () => {
+      btnEn.classList.add('active');
+      btnMl.classList.remove('active');
+      contentEn.classList.add('show');
+      contentMl.classList.remove('show');
+    });
 
-<h3>Quick Stats</h3>
-<p>Total Students: 2316 (Boys: 1556 | Girls: 848)<br>
-Total Teachers: 104<br>
-Higher Secondary: 647 students<br>
-VHSS: 236 students</p>
-
-<h3>Clubs and Projects</h3>
-<p>Little Kites, Library, NCC, NSS, SPC, Scouts & Guides, JRC, Vidyarangam, Social Science Club, Science Club, Maths Club, Environment Club, Arts Club, Sports Club, Tourism Club, Animal Club, Film Club, School Wiki Club, and more.</p>
-
-<p>Ongoing Projects: Back to School, My Village, Indigenous Knowledge, School Newspaper, Literacy Tree, Memoirs, My School, Say No To Drugs Campaign, Hi-Tech School, Kids Literacy.</p>
-
-  </div>
-</body>
+    btnMl.addEventListener('click', () => {
+      btnMl.classList.add('active');
+      btnEn.classList.remove('active');
+      contentMl.classList.add('show');
+      contentEn.classList.remove('show');
+    });
+  </script></body>
 </html>
